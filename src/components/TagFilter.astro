@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import TagPill from './TagPill.astro';
+
+const { type } = Astro.props;
+const posts = await getCollection(type);
+const allTags = [...new Set(posts.flatMap(post => post.data.tags))];
+---
+
+<div class="flex flex-wrap">
+  {allTags.map(tag => <TagPill tag={tag} />)}
+</div>

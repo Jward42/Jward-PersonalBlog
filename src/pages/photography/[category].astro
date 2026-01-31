@@ -1,0 +1,31 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoCard from '../../components/PhotoCard.astro';
+
+export async function getStaticPaths() {
+  const photos = await getCollection('photography');
+  const categories = [...new Set(photos.map((p) => p.data.category).filter(Boolean))];
+  
+  return categories.map((category) => ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const photos = (await getCollection('photography')).filter(
+  (p) => p.data.category === category
+);
+
+const title = `Photography: ${category}`;
+---
+<BaseLayout {title} description={`A collection of photography in the category: ${category}`}>
+  <a href="/photography" class="text-blue-600 hover:underline">&larr; All Categories</a>
+  <h1 class="text-2xl font-bold mt-4">{title}</h1>
+  
+  <div class="mt-8 columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+    {photos.map((p) => (
+      <PhotoCard photo={p} />
+    ))}
+  </div>
+</BaseLayout>

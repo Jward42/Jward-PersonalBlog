@@ -1,0 +1,10 @@
+# Project Rules (Astro + Tailwind + Content Collections)
+- Always read TASKS.md, DECISIONS.md, STYLEGUIDE.md before coding.
+- Do NOT add dependencies without updating DECISIONS.md (explain WHY).
+- Every commit references a Task ID (e.g. T-003) and includes a 1-line WHY.
+- Use semantic HTML and a11y: landmarks, labels, alt text.
+- All pages must include proper SEO meta per docs/SEO.md (via <BaseHead/>).
+- Styling: Tailwind utility-first; typography via @tailwindcss/typography.
+- Images: hosted on Cloudinary. When rendering, add transformations like `f_auto,q_auto,w_800` unless layout requires otherwise.
+- Content model: Manage posts & photos via src/content collections only.
+- If requirements unclear: propose 2–3 options in PR comment; don't guess.

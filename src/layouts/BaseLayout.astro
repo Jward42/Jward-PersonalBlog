@@ -1,0 +1,21 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const { title, description, canonical } = Astro.props as {
+title?: string; description?: string; canonical?: string;
+};
+---
+<html lang="zh-CN">
+<ViewTransitions />
+<BaseHead {title} {description} {canonical} />
+<body class="min-h-dvh bg-white text-neutral-900">
+<a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
+<Header />
+<main id="main" class="mx-auto max-w-screen-xl px-4 pt-8 pb-16">
+<slot />
+</main>
+<Footer />
+</body>
+</html>

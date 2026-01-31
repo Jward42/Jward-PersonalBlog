@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection, getEntry } from 'astro:content';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import PhotoCard from '../components/PhotoCard.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.isDraft)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
+const photos = (await getCollection('photography')).slice(0, 6);
+const homepage = await getEntry('homepage', 'hero');
+---
+<BaseLayout title="Edward Han · Portfolio" description="个人博客与 MLE 作品集">
+  <section class="relative h-96 rounded-2xl overflow-hidden">
+    <img
+      src={homepage.data.heroImage}
+      alt={homepage.data.heroImageAlt}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-60% to-transparent"></div>
+    <div class="relative h-full flex flex-col justify-center items-start p-12 text-white w-full">
+      <div class="w-3/5">
+        <h1 class="text-4xl font-bold tracking-tight">{homepage.data.title}</h1>
+        <p class="mt-3 text-lg">{homepage.data.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Latest Posts</h2>
+      <a href="/blog" class="text-sm text-blue-600 hover:underline">All posts →</a>
+    </div>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => <BlogPostCard post={post} />)}
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Featured Photography</h2>
+      <a href="/photography" class="text-sm text-blue-600 hover:underline">See gallery →</a>
+    </div>
+    <div class="mt-6 columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+      {photos.map((photo) => <PhotoCard photo={photo} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import TagFilter from '../../components/TagFilter.astro';
+const posts = (await getCollection('blog'))
+.filter((p) => !p.data.isDraft)
+.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+---
+<BaseLayout title="Blog — Edward Han" description="Technical posts and notes">
+<h1 class="text-2xl font-bold">Blog</h1>
+<TagFilter type="blog" />
+<div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="blog-posts">
+{posts.map((post) => <BlogPostCard post={post} />)}
+</div>
+</BaseLayout>
+
+<script>
+  import setupTagFiltering from '../../assets/scripts/filter.js';
+  setupTagFiltering('.tag-pill', '.blog-post-card');
+</script>

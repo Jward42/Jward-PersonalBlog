@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 可加入你的自定义 token */
+:root {
+--radius: 1rem;
+}
+
+
+.prose img {
+border-radius: var(--radius);
+}
