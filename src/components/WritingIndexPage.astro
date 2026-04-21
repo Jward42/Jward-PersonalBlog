@@ -13,7 +13,7 @@ const leadImage = leadPost?.data.heroImage ? transformCloudinaryUrl(leadPost.dat
   <section class="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1.15fr_0.85fr]">
     <div>
       <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Writing</p>
-      <h1 class="mt-4 max-w-3xl text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">
+      <h1 class="mt-4 max-w-3xl text-4xl font-display leading-tight text-neutral-900 md:text-6xl">
         Essays, notes, and fragments that deserve a longer shelf life.
       </h1>
     </div>
@@ -28,7 +28,7 @@ const leadImage = leadPost?.data.heroImage ? transformCloudinaryUrl(leadPost.dat
       <div class="space-y-5">
         <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Featured Essay</p>
         <a href={`/writing/${leadPost.slug}`} class="block">
-          <h2 class="max-w-2xl text-3xl font-serif leading-tight text-neutral-900 transition hover:opacity-75 md:text-5xl">
+          <h2 class="max-w-2xl text-3xl font-display leading-tight text-neutral-900 transition hover:opacity-75 md:text-5xl">
             {leadPost.data.title}
           </h2>
         </a>

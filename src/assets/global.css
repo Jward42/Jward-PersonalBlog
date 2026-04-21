@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Smiley Sans CJK";
+  src: url("/fonts/SmileySans.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+3000-303F,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "Jward Serif CJK";
+  src:
+    local("Source Han Serif SC"),
+    local("Source Han Serif CN"),
+    local("Source Han Serif"),
+    local("Noto Serif CJK SC"),
+    local("Noto Serif SC"),
+    local("Songti SC"),
+    local("STSong");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+3000-303F,
+    U+3400-4DBF,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FF00-FFEF;
+}
+
 :root {
   --paper: #f4efe7;
   --paper-deep: #ece4d8;
@@ -10,6 +45,9 @@
   --muted: #706459;
   --line: rgba(38, 29, 19, 0.12);
   --radius: 1.5rem;
+  --font-cn-display: "Smiley Sans CJK", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  --font-body-serif: "Lora", "Jward Serif CJK", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", serif;
+  --font-display-serif: "Lora", "Smiley Sans CJK", "Jward Serif CJK", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", serif;
 }
 
 html {
@@ -23,10 +61,16 @@ body {
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 18rem),
     var(--paper);
   color: var(--ink);
+  font-family: var(--font-body-serif);
 }
 
 ::selection {
   background: rgba(103, 80, 59, 0.22);
+}
+
+.cn-display {
+  font-family: var(--font-cn-display);
+  letter-spacing: 0.01em;
 }
 
 .prose img {

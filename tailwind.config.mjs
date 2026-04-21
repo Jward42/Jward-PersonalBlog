@@ -7,8 +7,10 @@ export default {
     theme: {
       extend: {
         fontFamily: {
-          sans: ['system-ui', 'sans-serif'],
-          serif: ['"Lora"', 'Georgia', 'serif'],
+          sans: ['"Inter Variable"', '"PingFang SC"', '"Hiragino Sans GB"', '"Noto Sans CJK SC"', '"Source Han Sans SC"', 'system-ui', 'sans-serif'],
+          serif: ['"Lora"', '"Jward Serif CJK"', '"Source Han Serif SC"', '"Noto Serif CJK SC"', '"Noto Serif SC"', '"Songti SC"', '"STSong"', 'serif'],
+          display: ['"Lora"', '"Smiley Sans CJK"', '"Jward Serif CJK"', '"Source Han Serif SC"', '"Noto Serif CJK SC"', '"Noto Serif SC"', 'serif'],
+          cnDisplay: ['"Smiley Sans CJK"', '"PingFang SC"', '"Hiragino Sans GB"', '"Noto Sans CJK SC"', '"Source Han Sans SC"', 'sans-serif'],
         },
         typography: (theme) => ({
           DEFAULT: {
@@ -30,7 +32,7 @@ export default {
                 fontFamily: theme('fontFamily.serif'),
               },
               'h1, h2, h3, h4, h5, h6': {
-                fontFamily: theme('fontFamily.sans'),
+                fontFamily: theme('fontFamily.display'),
               },
               'blockquote': {
                 fontStyle: 'normal',

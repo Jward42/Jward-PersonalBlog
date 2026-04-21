@@ -29,7 +29,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       </div>
     ) : (
       <div class="flex min-h-[18rem] items-end rounded-[1.8rem] border border-black/10 bg-[rgba(255,255,255,0.45)] p-6">
-        <p class="max-w-xs text-xl font-serif leading-tight text-neutral-900">{item.title}</p>
+        <p class="max-w-xs text-xl font-display leading-tight text-neutral-900">{item.title}</p>
       </div>
     )}
 
@@ -38,7 +38,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         <span>{item.kind === 'writing' ? 'Writing' : 'Travel'}</span>
         <span>{formattedDate}</span>
       </div>
-      <h3 class="text-2xl font-serif leading-tight text-neutral-900 transition group-hover:opacity-75">
+      <h3 class="text-2xl font-display leading-tight text-neutral-900 transition group-hover:opacity-75">
         {item.title}
       </h3>
       <p class="max-w-sm text-sm leading-6 text-neutral-600">{item.description}</p>
