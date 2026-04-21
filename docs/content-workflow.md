@@ -4,6 +4,8 @@ This site does not use a separate hosted database yet.
 
 The content files under `src/content/blog` and `src/content/photography` are the database.
 
+There is also a local author page at `/studio` for generating and saving markdown entries from the browser.
+
 ## Writing
 
 Create a new writing entry:

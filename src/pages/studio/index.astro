@@ -1,0 +1,434 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Studio — Jward Atlas" description="Author desk for creating writing and travel entries.">
+  <section class="grid gap-8 border-b border-black/10 pb-10 pt-6 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Studio</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">
+        A local author desk for writing, travel notes, and vlog entries.
+      </h1>
+    </div>
+    <div class="space-y-4 self-end text-sm leading-7 text-neutral-600">
+      <p>
+        This page is intentionally simple. Fill in the form, generate the markdown file, and then
+        either copy it, download it, or save it directly into your local repo folder from the browser.
+      </p>
+      <p>
+        For media upload, Cloudinary still works best through the helper script in the terminal. For
+        pure writing and metadata management, this page should keep you out of the command line most of the time.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-10 grid gap-8 xl:grid-cols-2">
+    <article class="studio-card">
+      <div class="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">Writing</p>
+          <h2 class="mt-2 text-3xl font-serif text-neutral-900">New writing post</h2>
+        </div>
+        <span class="rounded-full border border-black/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-neutral-500">
+          blog
+        </span>
+      </div>
+
+      <form data-studio-form="writing" class="space-y-5">
+        <div>
+          <label class="studio-label" for="writing-title">Title</label>
+          <input id="writing-title" name="title" class="studio-input" placeholder="A new essay title" />
+        </div>
+
+        <div>
+          <label class="studio-label" for="writing-description">Description</label>
+          <input id="writing-description" name="description" class="studio-input" placeholder="Short one-line summary" />
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="writing-date">Publish date</label>
+            <input id="writing-date" name="date" type="date" class="studio-input" />
+          </div>
+          <div>
+            <label class="studio-label" for="writing-tags">Tags</label>
+            <input id="writing-tags" name="tags" class="studio-input" placeholder="writing, reflection" />
+          </div>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="writing-image">Hero image URL</label>
+            <input id="writing-image" name="heroImage" class="studio-input" placeholder="https://..." />
+          </div>
+          <div>
+            <label class="studio-label" for="writing-rank">Feature rank</label>
+            <input id="writing-rank" name="featureRank" type="number" value="999" class="studio-input" />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-5">
+          <label class="inline-flex items-center gap-3 text-sm text-neutral-600">
+            <input name="featured" type="checkbox" class="h-4 w-4 rounded border-black/20" />
+            Featured on homepage
+          </label>
+          <label class="inline-flex items-center gap-3 text-sm text-neutral-600">
+            <input name="isDraft" type="checkbox" class="h-4 w-4 rounded border-black/20" />
+            Save as draft
+          </label>
+        </div>
+
+        <div>
+          <label class="studio-label" for="writing-body">Body</label>
+          <textarea id="writing-body" name="body" class="studio-textarea" placeholder="Write or paste your text here."></textarea>
+        </div>
+
+        <div class="rounded-[1.35rem] border border-black/10 bg-white/40 p-4">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-neutral-500">Suggested file</p>
+          <p class="mt-2 font-mono text-sm text-neutral-700" data-filename="writing">src/content/blog/2026-04-21-new-post.md</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button type="button" class="studio-button" data-action="copy" data-kind="writing">Copy Markdown</button>
+          <button type="button" class="studio-button studio-button-secondary" data-action="download" data-kind="writing">Download File</button>
+          <button type="button" class="studio-button studio-button-secondary" data-action="save" data-kind="writing">Save Into Repo Folder</button>
+        </div>
+
+        <p class="min-h-[1.5rem] text-sm text-neutral-600" data-status="writing"></p>
+
+        <div class="rounded-[1.4rem] border border-black/10 bg-[#f7f2ea] p-4">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-neutral-500">Markdown preview</p>
+          <pre class="mt-3 overflow-x-auto whitespace-pre-wrap text-sm leading-6 text-neutral-700" data-preview="writing"></pre>
+        </div>
+      </form>
+    </article>
+
+    <article class="studio-card">
+      <div class="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">Travel / Vlog</p>
+          <h2 class="mt-2 text-3xl font-serif text-neutral-900">New travel entry</h2>
+        </div>
+        <span class="rounded-full border border-black/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-neutral-500">
+          photo or video
+        </span>
+      </div>
+
+      <form data-studio-form="travel" class="space-y-5">
+        <div>
+          <label class="studio-label" for="travel-title">Title</label>
+          <input id="travel-title" name="title" class="studio-input" placeholder="Sunrise by the River" />
+        </div>
+
+        <div>
+          <label class="studio-label" for="travel-description">Description</label>
+          <input id="travel-description" name="description" class="studio-input" placeholder="Short editorial summary" />
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="travel-date">Capture date</label>
+            <input id="travel-date" name="date" type="date" class="studio-input" />
+          </div>
+          <div>
+            <label class="studio-label" for="travel-location">Location</label>
+            <input id="travel-location" name="location" class="studio-input" placeholder="Boston" />
+          </div>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="travel-category">Category</label>
+            <input id="travel-category" name="category" class="studio-input" placeholder="street / landscape / vlog" />
+          </div>
+          <div>
+            <label class="studio-label" for="travel-tags">Tags</label>
+            <input id="travel-tags" name="tags" class="studio-input" placeholder="travel, quiet, city" />
+          </div>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="travel-media-type">Media type</label>
+            <select id="travel-media-type" name="mediaType" class="studio-select">
+              <option value="image">image</option>
+              <option value="video">video</option>
+            </select>
+          </div>
+          <div>
+            <label class="studio-label" for="travel-ratio">Aspect ratio</label>
+            <input id="travel-ratio" name="aspectRatio" class="studio-input" value="1.25" placeholder="1.25" />
+          </div>
+        </div>
+
+        <div>
+          <label class="studio-label" for="travel-image-url">Image or poster URL</label>
+          <input id="travel-image-url" name="imageUrl" class="studio-input" placeholder="https://..." />
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="travel-video-url">Video URL</label>
+            <input id="travel-video-url" name="videoUrl" class="studio-input" placeholder="Only needed for vlog posts" />
+          </div>
+          <div>
+            <label class="studio-label" for="travel-poster-url">Poster image URL</label>
+            <input id="travel-poster-url" name="posterImage" class="studio-input" placeholder="Optional" />
+          </div>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label class="studio-label" for="travel-rank">Feature rank</label>
+            <input id="travel-rank" name="featureRank" type="number" value="999" class="studio-input" />
+          </div>
+          <div class="flex flex-wrap items-end gap-5 pb-2">
+            <label class="inline-flex items-center gap-3 text-sm text-neutral-600">
+              <input name="featured" type="checkbox" class="h-4 w-4 rounded border-black/20" />
+              Featured
+            </label>
+            <label class="inline-flex items-center gap-3 text-sm text-neutral-600">
+              <input name="isDraft" type="checkbox" class="h-4 w-4 rounded border-black/20" />
+              Draft
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="studio-label" for="travel-body">Notes</label>
+          <textarea id="travel-body" name="body" class="studio-textarea" placeholder="Travel notes, captions, or vlog description."></textarea>
+        </div>
+
+        <div class="rounded-[1.35rem] border border-black/10 bg-white/40 p-4">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-neutral-500">Suggested file</p>
+          <p class="mt-2 font-mono text-sm text-neutral-700" data-filename="travel">src/content/photography/2026-04-21-new-travel-entry.md</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button type="button" class="studio-button" data-action="copy" data-kind="travel">Copy Markdown</button>
+          <button type="button" class="studio-button studio-button-secondary" data-action="download" data-kind="travel">Download File</button>
+          <button type="button" class="studio-button studio-button-secondary" data-action="save" data-kind="travel">Save Into Repo Folder</button>
+        </div>
+
+        <p class="min-h-[1.5rem] text-sm text-neutral-600" data-status="travel"></p>
+
+        <div class="rounded-[1.4rem] border border-black/10 bg-[#f7f2ea] p-4">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-neutral-500">Markdown preview</p>
+          <pre class="mt-3 overflow-x-auto whitespace-pre-wrap text-sm leading-6 text-neutral-700" data-preview="travel"></pre>
+        </div>
+      </form>
+    </article>
+  </section>
+
+  <section class="mt-10 rounded-[2rem] border border-black/10 bg-white/35 p-6">
+    <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">Notes</p>
+    <div class="mt-4 grid gap-5 text-sm leading-7 text-neutral-600 md:grid-cols-3">
+      <p>For text-heavy work, this page can replace the CLI almost entirely.</p>
+      <p>For photo and video upload, the terminal helper is still the fastest if you want automatic Cloudinary upload.</p>
+      <p>Saving into the repo folder works best in Chromium-based browsers that support the File System Access API.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const today = new Date().toISOString().slice(0, 10);
+
+  const writingForm = document.querySelector('[data-studio-form="writing"]');
+  const travelForm = document.querySelector('[data-studio-form="travel"]');
+
+  if (writingForm && travelForm) {
+    writingForm.elements.date.value = today;
+    travelForm.elements.date.value = today;
+
+    const splitTags = (value) =>
+      value
+        .split(',')
+        .map((tag) => tag.trim())
+        .filter(Boolean);
+
+    const yamlString = (value) => JSON.stringify(value ?? '');
+    const yamlArray = (values) => `[${values.map((value) => yamlString(value)).join(', ')}]`;
+
+    const slugify = (value) =>
+      value
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/-{2,}/g, '-') || 'untitled';
+
+    const buildWriting = () => {
+      const title = writingForm.elements.title.value.trim() || 'Untitled Essay';
+      const description = writingForm.elements.description.value.trim() || 'A note in progress.';
+      const publishDate = writingForm.elements.date.value || today;
+      const tags = splitTags(writingForm.elements.tags.value);
+      const heroImage = writingForm.elements.heroImage.value.trim();
+      const featured = writingForm.elements.featured.checked;
+      const featureRank = writingForm.elements.featureRank.value.trim() || '999';
+      const isDraft = writingForm.elements.isDraft.checked;
+      const body = writingForm.elements.body.value.trim() || 'Write here.';
+      const filename = `src/content/blog/${publishDate}-${slugify(title)}.md`;
+
+      const lines = [
+        '---',
+        `title: ${yamlString(title)}`,
+        `description: ${yamlString(description)}`,
+        `publishDate: ${publishDate}`,
+        `tags: ${yamlArray(tags)}`,
+        heroImage ? `heroImage: ${yamlString(heroImage)}` : null,
+        `featured: ${featured}`,
+        `featureRank: ${featureRank}`,
+        `isDraft: ${isDraft}`,
+        '---',
+        '',
+        body,
+        '',
+      ].filter(Boolean);
+
+      return { filename, markdown: lines.join('\n') };
+    };
+
+    const buildTravel = () => {
+      const title = travelForm.elements.title.value.trim() || 'Untitled Travel Entry';
+      const description = travelForm.elements.description.value.trim() || 'A travel note in progress.';
+      const captureDate = travelForm.elements.date.value || today;
+      const location = travelForm.elements.location.value.trim() || 'Travel';
+      const category = travelForm.elements.category.value.trim() || 'travel';
+      const tags = splitTags(travelForm.elements.tags.value);
+      const mediaType = travelForm.elements.mediaType.value;
+      const imageUrl = travelForm.elements.imageUrl.value.trim() || 'https://...';
+      const videoUrl = travelForm.elements.videoUrl.value.trim();
+      const posterImage = travelForm.elements.posterImage.value.trim();
+      const aspectRatio = travelForm.elements.aspectRatio.value.trim() || '1.25';
+      const featured = travelForm.elements.featured.checked;
+      const featureRank = travelForm.elements.featureRank.value.trim() || '999';
+      const isDraft = travelForm.elements.isDraft.checked;
+      const body = travelForm.elements.body.value.trim() || 'Travel notes go here.';
+      const filename = `src/content/photography/${captureDate}-${slugify(title)}.md`;
+
+      const lines = [
+        '---',
+        `title: ${yamlString(title)}`,
+        `description: ${yamlString(description)}`,
+        `captureDate: ${captureDate}`,
+        `location: ${yamlString(location)}`,
+        `category: ${yamlString(category)}`,
+        `tags: ${yamlArray(tags)}`,
+        `imageUrl: ${yamlString(imageUrl)}`,
+        `aspectRatio: ${aspectRatio}`,
+        `mediaType: ${yamlString(mediaType)}`,
+        mediaType === 'video' && videoUrl ? `videoUrl: ${yamlString(videoUrl)}` : null,
+        mediaType === 'video' && posterImage ? `posterImage: ${yamlString(posterImage)}` : null,
+        `featured: ${featured}`,
+        `featureRank: ${featureRank}`,
+        `isDraft: ${isDraft}`,
+        '---',
+        '',
+        body,
+        '',
+      ].filter(Boolean);
+
+      return { filename, markdown: lines.join('\n') };
+    };
+
+    const builders = {
+      writing: buildWriting,
+      travel: buildTravel,
+    };
+
+    const updatePreview = (kind) => {
+      const { filename, markdown } = builders[kind]();
+      document.querySelector(`[data-filename="${kind}"]`).textContent = filename;
+      document.querySelector(`[data-preview="${kind}"]`).textContent = markdown;
+    };
+
+    const setStatus = (kind, message) => {
+      const status = document.querySelector(`[data-status="${kind}"]`);
+      status.textContent = message;
+    };
+
+    const downloadMarkdown = (filename, markdown) => {
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = filename.split('/').pop();
+      anchor.click();
+      URL.revokeObjectURL(url);
+    };
+
+    const getNestedDirectory = async (root, segments) => {
+      let current = root;
+      for (const segment of segments) {
+        current = await current.getDirectoryHandle(segment, { create: false });
+      }
+      return current;
+    };
+
+    const saveIntoRepo = async (kind) => {
+      if (!('showDirectoryPicker' in window)) {
+        throw new Error('Your browser does not support direct folder saving here yet.');
+      }
+
+      const { filename, markdown } = builders[kind]();
+      const root = await window.showDirectoryPicker();
+      const parts = filename.split('/');
+      const fileName = parts.pop();
+      const folder = await getNestedDirectory(root, parts);
+
+      let shouldOverwrite = true;
+      try {
+        await folder.getFileHandle(fileName, { create: false });
+        shouldOverwrite = window.confirm(`${fileName} already exists. Overwrite it?`);
+      } catch {
+        shouldOverwrite = true;
+      }
+
+      if (!shouldOverwrite) {
+        return 'Save cancelled.';
+      }
+
+      const fileHandle = await folder.getFileHandle(fileName, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(markdown);
+      await writable.close();
+      return `Saved ${filename}`;
+    };
+
+    const attachFormUpdates = (form, kind) => {
+      updatePreview(kind);
+      form.addEventListener('input', () => updatePreview(kind));
+      form.addEventListener('change', () => updatePreview(kind));
+    };
+
+    attachFormUpdates(writingForm, 'writing');
+    attachFormUpdates(travelForm, 'travel');
+
+    document.querySelectorAll('[data-action]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const kind = button.dataset.kind;
+        const action = button.dataset.action;
+        const { filename, markdown } = builders[kind]();
+
+        try {
+          if (action === 'copy') {
+            await navigator.clipboard.writeText(markdown);
+            setStatus(kind, `Copied ${filename}`);
+          }
+
+          if (action === 'download') {
+            downloadMarkdown(filename, markdown);
+            setStatus(kind, `Downloaded ${filename}`);
+          }
+
+          if (action === 'save') {
+            const message = await saveIntoRepo(kind);
+            setStatus(kind, message);
+          }
+        } catch (error) {
+          setStatus(kind, error.message || 'Something went wrong.');
+        }
+      });
+    });
+  }
+</script>

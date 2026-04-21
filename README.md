@@ -37,6 +37,7 @@ That is it.
 - `/writing` writing archive
 - `/travel` travel archive
 - `/about` about page
+- `/studio` local author desk
 
 The homepage automatically pulls:
 
@@ -151,6 +152,24 @@ You can:
 - paste in your writing or notes
 
 This is the best default workflow if you like thinking in folders.
+
+### Option 1.5: Use the Studio page
+
+There is also a browser-based author page at:
+
+```text
+/studio
+```
+
+It can:
+
+- generate the Markdown for writing and travel posts
+- suggest the correct filename
+- let you copy the result
+- let you download the file
+- in supported browsers, save directly into your local repo folder
+
+This is the easiest option if you want a more visual workflow without adopting a full CMS.
 
 ### Option 2: Use the helper commands
 

@@ -44,3 +44,65 @@ body {
 .horizontal-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.studio-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #706459;
+}
+
+.studio-input,
+.studio-textarea,
+.studio-select {
+  width: 100%;
+  border: 1px solid rgba(38, 29, 19, 0.12);
+  border-radius: 1rem;
+  background: rgba(255, 252, 247, 0.78);
+  padding: 0.9rem 1rem;
+  color: #1f1913;
+  outline: none;
+}
+
+.studio-input:focus,
+.studio-textarea:focus,
+.studio-select:focus {
+  border-color: rgba(38, 29, 19, 0.3);
+  box-shadow: 0 0 0 3px rgba(103, 80, 59, 0.08);
+}
+
+.studio-textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.studio-card {
+  border: 1px solid rgba(38, 29, 19, 0.12);
+  border-radius: 2rem;
+  background: rgba(255, 252, 247, 0.56);
+  padding: 1.35rem;
+}
+
+.studio-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(38, 29, 19, 0.12);
+  border-radius: 9999px;
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 252, 247, 0.82);
+  color: #1f1913;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.studio-button:hover {
+  background: #1f1913;
+  border-color: #1f1913;
+  color: white;
+}
+
+.studio-button-secondary {
+  background: transparent;
+}
