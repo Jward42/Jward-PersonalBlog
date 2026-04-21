@@ -1,12 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="About — Edward Han" description="Bio, skills, resume">
-<h1 class="text-2xl font-bold">About</h1>
-<p class="mt-4 max-w-prose">I'm a data science student and MLE-in-progress. This site hosts my blog and photography. Skills: Python, Pandas/NumPy, PyTorch, Docker, GCP/AWS; Web: Astro, Tailwind.</p>
-<ul class="mt-6 list-disc pl-6 text-neutral-700">
-<li>Resume: <a class="text-blue-600 hover:underline" href="#">PDF</a></li>
-<li>GitHub: <a class="text-blue-600 hover:underline" href="#">@your-github</a></li>
-<li>LinkedIn: <a class="text-blue-600 hover:underline" href="#">Profile</a></li>
-</ul>
+<BaseLayout title="About — Edward Han" description="About this personal atlas.">
+  <section class="grid gap-8 border-b border-black/10 pb-10 pt-6 lg:grid-cols-[1fr_0.9fr]">
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">About</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">
+        A small home for work that moves at different speeds.
+      </h1>
+    </div>
+    <div class="space-y-5 text-sm leading-7 text-neutral-600">
+      <p>
+        This site is being rebuilt as a place where writing and visual travel notes can sit side by side.
+        Not a utility-first portfolio, and not only a blog either. More like a personal publication with room for editing, pacing, and return visits.
+      </p>
+      <p>
+        Over time, the travel section can expand from still photographs into short video or vlog posts without needing a new structure.
+      </p>
+    </div>
+  </section>
 </BaseLayout>

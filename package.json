@@ -7,12 +7,16 @@
         "dev": "astro dev",
         "build": "astro build",
         "preview": "astro preview",
-        "lint": "echo 'add eslint if needed'"
+        "lint": "echo 'add eslint if needed'",
+        "new:writing": "node scripts/content/new-writing.mjs",
+        "new:travel": "node scripts/content/new-travel.mjs"
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.6.0",
         "@astrojs/tailwind": "^5.1.0",
-        "astro": "^4.15.0"
+        "astro": "^4.15.0",
+        "cloudinary": "^2.8.0",
+        "dotenv": "^17.2.3"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.15",

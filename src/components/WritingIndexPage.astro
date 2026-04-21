@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPostCard from './BlogPostCard.astro';
+import TagFilter from './TagFilter.astro';
+import { getWritingEntries } from '../utils/content';
+import { transformCloudinaryUrl } from '../utils/images';
+
+const posts = await getWritingEntries();
+const [leadPost, ...restPosts] = posts;
+const leadImage = leadPost?.data.heroImage ? transformCloudinaryUrl(leadPost.data.heroImage, 1400) : undefined;
+---
+<BaseLayout title="Writing — Edward Han" description="Essays, notes, and personal writing.">
+  <section class="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1.15fr_0.85fr]">
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Writing</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">
+        Essays, notes, and fragments that deserve a longer shelf life.
+      </h1>
+    </div>
+    <p class="max-w-xl self-end text-sm leading-7 text-neutral-600">
+      This section is meant to feel closer to a journal column than a conventional blog index.
+      A few pieces can stay prominent, while the rest remain easy to find through tags and chronology.
+    </p>
+  </section>
+
+  {leadPost && (
+    <section class="mt-10 grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[0.95fr_1.05fr]">
+      <div class="space-y-5">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Featured Essay</p>
+        <a href={`/writing/${leadPost.slug}`} class="block">
+          <h2 class="max-w-2xl text-3xl font-serif leading-tight text-neutral-900 transition hover:opacity-75 md:text-5xl">
+            {leadPost.data.title}
+          </h2>
+        </a>
+        <p class="max-w-xl text-sm leading-7 text-neutral-600">{leadPost.data.description}</p>
+      </div>
+
+      {leadImage && (
+        <a href={`/writing/${leadPost.slug}`} class="group overflow-hidden rounded-[2rem] bg-stone-200">
+          <img
+            src={leadImage}
+            alt={leadPost.data.title}
+            class="h-full max-h-[34rem] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          />
+        </a>
+      )}
+    </section>
+  )}
+
+  <section class="mt-8">
+    <TagFilter type="blog" />
+  </section>
+
+  <section id="writing-list" class="mt-8 grid gap-x-10 gap-y-12 lg:grid-cols-2">
+    {restPosts.map((post) => <BlogPostCard post={post} />)}
+  </section>
+</BaseLayout>
+
+<script>
+  import setupTagFiltering from '../assets/scripts/filter.js';
+  setupTagFiltering('.tag-pill', '.blog-post-card');
+</script>

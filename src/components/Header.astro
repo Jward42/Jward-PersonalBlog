@@ -1,28 +1,25 @@
-<header class="sticky top-0 z-10 w-full border-b bg-white/80 backdrop-blur-md">
-  <div class="mx-auto max-w-screen-xl px-4 py-4 flex items-center justify-between">
-    <a href="/" class="font-bold text-xl tracking-tight">EH • Portfolio</a>
-    
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-      <a href="/blog" class="hover:text-blue-600 transition-colors">Blog</a>
-      <a href="/photography" class="hover:text-blue-600 transition-colors">Photography</a>
-      <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
+<header class="sticky top-0 z-20 w-full border-b border-black/10 bg-[rgba(244,239,231,0.82)] backdrop-blur-md">
+  <div class="mx-auto flex max-w-[92rem] items-center justify-between px-4 py-4">
+    <a href="/" class="text-[11px] uppercase tracking-[0.34em] text-neutral-900">Jward Atlas</a>
+
+    <nav class="hidden items-center gap-8 text-sm text-neutral-600 md:flex">
+      <a href="/writing" class="transition hover:text-neutral-900">Writing</a>
+      <a href="/travel" class="transition hover:text-neutral-900">Travel</a>
+      <a href="/about" class="transition hover:text-neutral-900">About</a>
     </nav>
 
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-600 hover:text-neutral-900 focus:outline-none" aria-label="Toggle menu">
+    <button id="mobile-menu-btn" class="p-2 text-neutral-600 hover:text-neutral-900 focus:outline-none md:hidden" aria-label="Toggle menu">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
   </div>
 
-  <!-- Mobile Navigation Menu (Hidden by default) -->
-  <div id="mobile-menu" class="hidden md:hidden border-t bg-white px-4 py-4 shadow-lg absolute w-full left-0">
+  <div id="mobile-menu" class="absolute left-0 hidden w-full border-t border-black/10 bg-[rgba(251,248,242,0.95)] px-4 py-4 shadow-lg md:hidden">
     <nav class="flex flex-col gap-4 text-base font-medium">
-      <a href="/blog" class="block py-2 hover:text-blue-600">Blog</a>
-      <a href="/photography" class="block py-2 hover:text-blue-600">Photography</a>
-      <a href="/about" class="block py-2 hover:text-blue-600">About</a>
+      <a href="/writing" class="block py-2 hover:text-neutral-900">Writing</a>
+      <a href="/travel" class="block py-2 hover:text-neutral-900">Travel</a>
+      <a href="/about" class="block py-2 hover:text-neutral-900">About</a>
     </nav>
   </div>
 </header>

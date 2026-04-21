@@ -9,23 +9,33 @@ const blogCollection = defineCollection({
     description: z.string(),
     publishDate: z.coerce.date(),
     tags: z.array(z.string()).default([]),
-    heroImage: z.string().url().optional(), // Cloudinary URL
+    heroImage: z.string().url().optional(),
+    featured: z.boolean().default(false),
+    featureRank: z.number().int().default(999),
     isDraft: z.boolean().default(false)
   })
 });
 
 
-// Photography collection (.md used for metadata; image hosted on Cloudinary)
+// Photography collection powers the Travel section.
 const photographyCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
     captureDate: z.coerce.date(),
+    location: z.string().optional(),
     category: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    imageUrl: z.string().url(), // Cloudinary URL
-    aspectRatio: z.number().default(1)
+    imageUrl: z.string().url(),
+    alt: z.string().optional(),
+    aspectRatio: z.number().positive().default(1.25),
+    mediaType: z.enum(['image', 'video']).default('image'),
+    videoUrl: z.string().url().optional(),
+    posterImage: z.string().url().optional(),
+    featured: z.boolean().default(false),
+    featureRank: z.number().int().default(999),
+    isDraft: z.boolean().default(false)
   })
 });
 

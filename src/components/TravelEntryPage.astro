@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from './Tag.astro';
+import { transformCloudinaryUrl } from '../utils/images';
+
+interface Props {
+  photo: CollectionEntry<'photography'>;
+}
+
+const { photo } = Astro.props;
+const { Content } = await photo.render();
+const coverImage = transformCloudinaryUrl(photo.data.posterImage ?? photo.data.imageUrl, 1800);
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(photo.data.captureDate);
+---
+<BaseLayout title={`${photo.data.title} — Travel`} description={photo.data.description ?? 'Travel note'}>
+  <article class="mx-auto max-w-6xl">
+    <header class="grid gap-8 border-b border-black/10 pb-10 pt-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <div>
+        <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Travel</p>
+        <h1 class="mt-5 text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">
+          {photo.data.title}
+        </h1>
+      </div>
+
+      <div class="space-y-4 self-end text-sm leading-7 text-neutral-600">
+        {photo.data.description && <p>{photo.data.description}</p>}
+        <div class="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.24em] text-neutral-500">
+          <span>{photo.data.location ?? 'Travel'}</span>
+          <span>{formattedDate}</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {photo.data.tags.map((tag) => <Tag tag={tag} />)}
+        </div>
+      </div>
+    </header>
+
+    <div class="mt-10 overflow-hidden rounded-[2rem] bg-stone-200" style={`aspect-ratio: ${photo.data.aspectRatio};`}>
+      {photo.data.mediaType === 'video' && photo.data.videoUrl ? (
+        <video
+          class="h-full w-full object-cover"
+          controls
+          poster={coverImage}
+          preload="metadata"
+        >
+          <source src={photo.data.videoUrl} />
+        </video>
+      ) : (
+        <img
+          src={coverImage}
+          alt={photo.data.alt ?? photo.data.title}
+          class="h-full w-full object-cover"
+        />
+      )}
+    </div>
+
+    <div class="prose prose-lg mx-auto mt-12 max-w-3xl">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

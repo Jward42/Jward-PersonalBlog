@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import TravelEntryPage from '../../../components/TravelEntryPage.astro';
+import TravelEntryPage from '../../components/TravelEntryPage.astro';
 
 export async function getStaticPaths() {
   const photos = await getCollection('photography', ({ data }) => !data.isDraft);

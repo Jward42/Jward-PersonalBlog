@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoCard from './PhotoCard.astro';
+import TagFilter from './TagFilter.astro';
+import { getTravelEntries } from '../utils/content';
+import { transformCloudinaryUrl } from '../utils/images';
+
+const entries = await getTravelEntries();
+const [leadEntry, ...restEntries] = entries;
+const leadImage = leadEntry ? transformCloudinaryUrl(leadEntry.data.posterImage ?? leadEntry.data.imageUrl, 1600) : undefined;
+---
+<BaseLayout title="Travel — Edward Han" description="Travel notes, photography, and future vlog posts.">
+  <section class="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1.15fr_0.85fr]">
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Travel</p>
+      <h1 class="mt-4 text-4xl font-serif leading-tight text-neutral-900 md:text-6xl">游记</h1>
+    </div>
+    <p class="max-w-xl self-end text-sm leading-7 text-neutral-600">
+      A place for photographs, small travel essays, and, later on, short moving-image posts.
+      The grid is built to hold both vertical and horizontal work without forcing them into the same shape.
+    </p>
+  </section>
+
+  {leadEntry && leadImage && (
+    <section class="mt-10 grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1.08fr_0.92fr]">
+      <a
+        href={`/travel/${leadEntry.slug}`}
+        class="group overflow-hidden rounded-[2rem] bg-stone-200"
+        style={`aspect-ratio: ${leadEntry.data.aspectRatio};`}
+      >
+        <img
+          src={leadImage}
+          alt={leadEntry.data.alt ?? leadEntry.data.title}
+          class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        />
+      </a>
+
+      <div class="flex flex-col justify-end space-y-5">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Lead Story</p>
+        <a href={`/travel/${leadEntry.slug}`} class="block">
+          <h2 class="text-3xl font-serif leading-tight text-neutral-900 transition hover:opacity-75 md:text-5xl">
+            {leadEntry.data.title}
+          </h2>
+        </a>
+        <p class="max-w-xl text-sm leading-7 text-neutral-600">
+          {leadEntry.data.description}
+        </p>
+        <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">
+          {leadEntry.data.location ?? 'Travel'}
+        </p>
+      </div>
+    </section>
+  )}
+
+  <section class="mt-8">
+    <TagFilter type="photography" />
+  </section>
+
+  <section id="travel-list" class="mt-8 columns-1 gap-6 sm:columns-2 xl:columns-3">
+    {restEntries.map((entry) => <PhotoCard photo={entry} />)}
+  </section>
+</BaseLayout>
+
+<script>
+  import setupTagFiltering from '../assets/scripts/filter.js';
+  setupTagFiltering('.tag-pill', '.travel-card');
+</script>

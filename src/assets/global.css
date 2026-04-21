@@ -2,13 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* 可加入你的自定义 token */
 :root {
---radius: 1rem;
+  --paper: #f4efe7;
+  --paper-deep: #ece4d8;
+  --card: rgba(255, 252, 247, 0.72);
+  --ink: #1f1913;
+  --muted: #706459;
+  --line: rgba(38, 29, 19, 0.12);
+  --radius: 1.5rem;
 }
 
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 34rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 18rem),
+    var(--paper);
+  color: var(--ink);
+}
+
+::selection {
+  background: rgba(103, 80, 59, 0.22);
+}
 
 .prose img {
-border-radius: var(--radius);
+  border-radius: var(--radius);
+}
+
+.prose :where(p, li) {
+  color: #4f453c;
+}
+
+.horizontal-scroll {
+  scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
 }

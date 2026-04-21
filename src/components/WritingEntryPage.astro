@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from './Tag.astro';
+import { transformCloudinaryUrl } from '../utils/images';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const heroImage = post.data.heroImage ? transformCloudinaryUrl(post.data.heroImage, 1600) : undefined;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(post.data.publishDate);
+---
+<BaseLayout title={`${post.data.title} — Writing`} description={post.data.description}>
+  <article class="mx-auto max-w-5xl">
+    <header class="border-b border-black/10 pb-10 pt-12">
+      <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500">Writing</p>
+      <h1 class="mt-5 text-4xl font-serif leading-tight text-neutral-900 md:text-6xl" transition:name={`blog-title-${post.slug}`}>
+        {post.data.title}
+      </h1>
+      <div class="mt-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.24em] text-neutral-500">
+        <span>{formattedDate}</span>
+        {post.data.tags.map((tag) => <Tag tag={tag} />)}
+      </div>
+    </header>
+
+    {heroImage && (
+      <div class="mt-10 overflow-hidden rounded-[2rem] bg-stone-200">
+        <img src={heroImage} alt={post.data.title} class="h-full max-h-[42rem] w-full object-cover" />
+      </div>
+    )}
+
+    <div class="prose prose-lg mx-auto mt-12 max-w-3xl">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
