@@ -20,6 +20,11 @@ The content files are the database:
 
 Each Markdown file is one post.
 
+Reusable templates live outside the public site in:
+
+- `templates/writing-template.md`
+- `templates/travel-template.md`
+
 ## If You Are Using This As An Author
 
 The easiest mental model is:

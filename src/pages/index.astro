@@ -70,17 +70,26 @@ const heroImage = transformCloudinaryUrl(homepage.data.heroImage, 1800);
       </div>
 
       <div class="mt-8 space-y-8">
-        {latestWriting.map((post) => (
-          <article class="border-t border-black/10 pt-6">
-            <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">
-              {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(post.data.publishDate)}
+        {latestWriting.length > 0 ? (
+          latestWriting.map((post) => (
+            <article class="border-t border-black/10 pt-6">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">
+                {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(post.data.publishDate)}
+              </p>
+              <a href={`/writing/${post.slug}`} class="mt-3 block text-2xl font-display leading-tight text-neutral-900 transition hover:opacity-75">
+                {post.data.title}
+              </a>
+              <p class="mt-3 max-w-xl text-sm leading-6 text-neutral-600">{post.data.description}</p>
+            </article>
+          ))
+        ) : (
+          <article class="rounded-[1.8rem] border border-black/10 bg-white/35 p-6">
+            <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">Writing Placeholder</p>
+            <p class="mt-3 max-w-xl text-sm leading-7 text-neutral-600">
+              No placeholder essays are being shown here. This section will populate automatically once real writing is published.
             </p>
-            <a href={`/writing/${post.slug}`} class="mt-3 block text-2xl font-display leading-tight text-neutral-900 transition hover:opacity-75">
-              {post.data.title}
-            </a>
-            <p class="mt-3 max-w-xl text-sm leading-6 text-neutral-600">{post.data.description}</p>
           </article>
-        ))}
+        )}
       </div>
     </div>
 

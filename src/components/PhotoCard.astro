@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { transformCloudinaryUrl } from '../utils/images';
+import { getTravelCardFrameStyle } from '../utils/content';
 
 interface Props {
   photo: CollectionEntry<'photography'>;
@@ -13,7 +14,7 @@ const transformed = transformCloudinaryUrl(photo.data.posterImage ?? photo.data.
   <a href={`/travel/${photo.slug}`} class="group block">
     <div
       class="overflow-hidden rounded-[1.6rem] bg-stone-200"
-      style={`aspect-ratio: ${photo.data.aspectRatio};`}
+      style={getTravelCardFrameStyle(photo.data.aspectRatio)}
     >
       <img
         src={transformed}

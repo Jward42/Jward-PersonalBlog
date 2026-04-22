@@ -1,9 +1,10 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import WritingEntryPage from '../../components/WritingEntryPage.astro';
+import { getWritingEntries } from '../../utils/content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.isDraft);
+  const posts = await getWritingEntries();
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

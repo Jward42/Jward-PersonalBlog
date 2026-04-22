@@ -3,6 +3,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type WritingEntry = CollectionEntry<'blog'>;
 export type TravelEntry = CollectionEntry<'photography'>;
 
+const blogEntryModules = import.meta.glob('/src/content/blog/**/*.{md,mdx}');
+
 export type HighlightItem =
   | {
       kind: 'writing';
@@ -50,6 +52,10 @@ function sortByFeaturedThenDate<T extends WritingEntry | TravelEntry>(
 }
 
 export async function getWritingEntries() {
+  if (Object.keys(blogEntryModules).length === 0) {
+    return [];
+  }
+
   return (await getCollection('blog'))
     .filter((entry) => !entry.data.isDraft)
     .sort((left, right) => sortByDateDesc(left, right, (entry) => entry.data.publishDate));
@@ -59,6 +65,48 @@ export async function getTravelEntries() {
   return (await getCollection('photography'))
     .filter((entry) => !entry.data.isDraft)
     .sort((left, right) => sortByDateDesc(left, right, (entry) => entry.data.captureDate));
+}
+
+export function pickLeadTravelEntry(entries: TravelEntry[]) {
+  if (!entries.length) {
+    return undefined;
+  }
+
+  return [...entries].sort((left, right) =>
+    sortByFeaturedThenDate(left, right, (entry) => entry.data.captureDate),
+  )[0];
+}
+
+export function getTravelCardFrameStyle(aspectRatio: number) {
+  if (aspectRatio < 0.85) {
+    return 'height: clamp(20rem, 52vw, 29rem);';
+  }
+
+  if (aspectRatio < 1.15) {
+    return 'height: clamp(18rem, 42vw, 24rem);';
+  }
+
+  if (aspectRatio < 1.65) {
+    return 'height: clamp(16rem, 34vw, 20rem);';
+  }
+
+  return 'height: clamp(15rem, 30vw, 18rem);';
+}
+
+export function getTravelLeadFrameStyle(aspectRatio: number) {
+  if (aspectRatio < 0.85) {
+    return 'height: clamp(22rem, 46vw, 34rem);';
+  }
+
+  if (aspectRatio < 1.15) {
+    return 'height: clamp(21rem, 40vw, 30rem);';
+  }
+
+  if (aspectRatio < 1.65) {
+    return 'height: clamp(19rem, 34vw, 26rem);';
+  }
+
+  return 'height: clamp(18rem, 30vw, 23rem);';
 }
 
 export async function getHomepageHighlights(limit = 6): Promise<HighlightItem[]> {

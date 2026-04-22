@@ -2,11 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoCard from './PhotoCard.astro';
 import TagFilter from './TagFilter.astro';
-import { getTravelEntries } from '../utils/content';
+import {
+  getTravelEntries,
+  getTravelLeadFrameStyle,
+  pickLeadTravelEntry,
+} from '../utils/content';
 import { transformCloudinaryUrl } from '../utils/images';
 
 const entries = await getTravelEntries();
-const [leadEntry, ...restEntries] = entries;
+const leadEntry = pickLeadTravelEntry(entries);
+const restEntries = entries.filter((entry) => entry.id !== leadEntry?.id);
 const leadImage = leadEntry ? transformCloudinaryUrl(leadEntry.data.posterImage ?? leadEntry.data.imageUrl, 1600) : undefined;
 ---
 <BaseLayout title="Travel — Edward Han" description="Travel notes, photography, and future vlog posts.">
@@ -26,7 +31,7 @@ const leadImage = leadEntry ? transformCloudinaryUrl(leadEntry.data.posterImage 
       <a
         href={`/travel/${leadEntry.slug}`}
         class="group overflow-hidden rounded-[2rem] bg-stone-200"
-        style={`aspect-ratio: ${leadEntry.data.aspectRatio};`}
+        style={getTravelLeadFrameStyle(leadEntry.data.aspectRatio)}
       >
         <img
           src={leadImage}

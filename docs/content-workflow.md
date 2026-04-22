@@ -6,6 +6,11 @@ The content files under `src/content/blog` and `src/content/photography` are the
 
 There is also a local author page at `/studio` for generating and saving markdown entries from the browser.
 
+If you want clean starter files without publishing fake content, use:
+
+- `templates/writing-template.md`
+- `templates/travel-template.md`
+
 ## Writing
 
 Create a new writing entry:

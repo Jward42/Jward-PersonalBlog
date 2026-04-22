@@ -47,13 +47,28 @@ const leadImage = leadPost?.data.heroImage ? transformCloudinaryUrl(leadPost.dat
     </section>
   )}
 
-  <section class="mt-8">
-    <TagFilter type="blog" />
-  </section>
+  {posts.length > 0 ? (
+    <>
+      <section class="mt-8">
+        <TagFilter type="blog" />
+      </section>
 
-  <section id="writing-list" class="mt-8 grid gap-x-10 gap-y-12 lg:grid-cols-2">
-    {restPosts.map((post) => <BlogPostCard post={post} />)}
-  </section>
+      <section id="writing-list" class="mt-8 grid gap-x-10 gap-y-12 lg:grid-cols-2">
+        {restPosts.map((post) => <BlogPostCard post={post} />)}
+      </section>
+    </>
+  ) : (
+    <section class="mt-10 rounded-[2rem] border border-black/10 bg-white/35 p-8">
+      <p class="text-[11px] uppercase tracking-[0.24em] text-neutral-500">Writing Placeholder</p>
+      <h2 class="mt-4 text-3xl font-display leading-tight text-neutral-900 md:text-4xl">
+        The writing archive is intentionally empty for now.
+      </h2>
+      <p class="mt-4 max-w-2xl text-sm leading-7 text-neutral-600">
+        No sample essays are being used as public-facing content. New published pieces will appear here
+        once you add real writing. Draft structure and templates still exist behind the scenes so the workflow stays easy.
+      </p>
+    </section>
+  )}
 </BaseLayout>
 
 <script>
