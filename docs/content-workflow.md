@@ -1,99 +1,122 @@
 # Content Workflow
 
-This site does not use a separate hosted database yet.
+The site does not use a hosted CMS. Markdown files are the content database.
 
-The content files under `src/content/blog` and `src/content/photography` are the database.
+## Daily Entry Points
 
-## Two-Step Author Workflow
-
-Most days, use one simple entry point:
+Create new content:
 
 ```bash
 npm run new
 ```
 
-For a fast writing entry:
+Create a fast writing entry:
 
 ```bash
 npm run write -- "A small title"
 ```
 
-Once a week, check what would be published:
+See `USAGE.md` for the full author workflow.
 
-```bash
-npm run publish:check
+## Content Folders
+
+Writing:
+
+```text
+src/content/blog/
 ```
 
-Then publish:
+Travel, photography, and future vlog entries:
 
-```bash
-npm run publish:weekly
+```text
+src/content/photography/
 ```
 
-The weekly script runs a production build, stages only safe content paths, commits them, and pushes to GitHub. Vercel deploys from GitHub after the push.
+Photo categories:
 
-Safe weekly paths are:
-
-- `src/content/`
-- `public/uploads/`
-- `public/images/`
-- `public/media/`
-- `public/photos/`
-
-There is also a local author page at `/studio` for generating and saving markdown entries from the browser.
-
-If you want clean starter files without publishing fake content, use:
-
-- `templates/writing-template.md`
-- `templates/travel-template.md`
-
-## Writing
-
-Create a new writing entry:
-
-```bash
-npm run new:writing
+```text
+src/content/photoCategories/
 ```
 
-Import body text from an existing diary file:
+Reusable starter files:
 
-```bash
-npm run new:writing -- --from /absolute/path/to/diary.md
+```text
+templates/writing-template.md
+templates/travel-template.md
 ```
 
-## Travel / Photo / Vlog
+## Writing Frontmatter
 
-Create a new travel entry:
-
-```bash
-npm run new:travel
+```yaml
+title: "My New Essay"
+description: "A short one-line summary."
+publishDate: 2026-05-04
+tags: ["writing", "reflection"]
+heroImage: "https://..."
+featured: false
+featureRank: 999
+isDraft: false
 ```
 
-If Cloudinary credentials exist in `.env`, you can pass a local photo or video file and the script will upload it first, then generate the markdown entry automatically.
+## Travel Frontmatter
 
-```bash
-npm run new:travel -- --file /absolute/path/to/media.mov
+```yaml
+title: "Sunrise by the River"
+description: "Golden light over still water."
+captureDate: 2026-05-04
+location: "Boston"
+category: "waterside"
+tags: ["travel", "sunrise", "quiet"]
+imageUrl: "https://..."
+aspectRatio: 1.58
+mediaType: "image"
+featured: false
+featureRank: 999
+isDraft: false
 ```
 
-If you already have hosted media, skip upload and paste the URL when prompted.
+For video entries, add:
+
+```yaml
+mediaType: "video"
+videoUrl: "https://..."
+posterImage: "https://..."
+```
+
+## Drafts And Publishing
+
+`isDraft: true` appears in local development and is hidden in production builds.
+
+`isDraft: false` can be published.
+
+Homepage highlights use:
+
+```yaml
+featured: true
+featureRank: 1
+```
+
+Lower `featureRank` appears first.
 
 ## Tags
 
-Tags are just arrays in frontmatter, for example:
+Keep tags short and stable.
 
-```yaml
-tags: [travel, sunrise, quiet]
+Good patterns:
+
+- format: `essay`, `travel`, `vlog`
+- mood/topic: `quiet`, `reflection`, `city`
+- place: `boston`, `banff`, `kyoto`
+
+Avoid near-duplicates like `photo`, `photos`, and `photography` all at once.
+
+## Media Upload
+
+Cloudinary-backed upload is available through:
+
+```bash
+npm run new:travel -- --file /absolute/path/to/media.jpg
 ```
-
-Use a small stable vocabulary and avoid synonyms like `photo`, `photos`, `photography` all at once.
-
-Suggested pattern:
-
-- format tags: `essay`, `travel`, `vlog`
-- mood or topic tags: `quiet`, `reflection`, `city`
-- place tags: `boston`, `banff`, `kyoto`
-
-## Cloudinary Setup
 
 Create `.env` from `.env.example` and fill in:
 
@@ -101,5 +124,3 @@ Create `.env` from `.env.example` and fill in:
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
 - `CLOUDINARY_UPLOAD_FOLDER`
-
-Once that is set, local media import becomes a one-step flow instead of upload + copy URL + paste URL.
