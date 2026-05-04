@@ -1,9 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import TagPill from './TagPill.astro';
+import { isVisibleContent } from '../utils/content';
 
 const { type } = Astro.props as { type: 'blog' | 'photography' };
-const entries = await getCollection(type);
+const entries = await getCollection(type, ({ data }) => isVisibleContent(data));
 const allTags = [...new Set(entries.flatMap((entry) => entry.data.tags ?? []))].sort();
 ---
 

@@ -1,9 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import TravelEntryPage from '../../../components/TravelEntryPage.astro';
+import { isVisibleContent } from '../../../utils/content';
 
 export async function getStaticPaths() {
-  const photos = await getCollection('photography', ({ data }) => !data.isDraft);
+  const photos = await getCollection('photography', ({ data }) => isVisibleContent(data));
   return photos.map((photo) => ({
     params: { slug: photo.slug },
     props: { photo },

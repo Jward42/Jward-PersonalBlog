@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npm run new:writing -- "$@"
+npm run write -- "$@"

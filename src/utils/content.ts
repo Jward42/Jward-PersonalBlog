@@ -28,6 +28,12 @@ export type HighlightItem =
       location?: string;
     };
 
+export const showDrafts = import.meta.env.DEV;
+
+export function isVisibleContent(data: { isDraft?: boolean }) {
+  return showDrafts || !data.isDraft;
+}
+
 function sortByDateDesc<T extends WritingEntry | TravelEntry>(
   left: T,
   right: T,
@@ -57,13 +63,13 @@ export async function getWritingEntries() {
   }
 
   return (await getCollection('blog'))
-    .filter((entry) => !entry.data.isDraft)
+    .filter((entry) => isVisibleContent(entry.data))
     .sort((left, right) => sortByDateDesc(left, right, (entry) => entry.data.publishDate));
 }
 
 export async function getTravelEntries() {
   return (await getCollection('photography'))
-    .filter((entry) => !entry.data.isDraft)
+    .filter((entry) => isVisibleContent(entry.data))
     .sort((left, right) => sortByDateDesc(left, right, (entry) => entry.data.captureDate));
 }
 

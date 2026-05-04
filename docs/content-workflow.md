@@ -4,6 +4,42 @@ This site does not use a separate hosted database yet.
 
 The content files under `src/content/blog` and `src/content/photography` are the database.
 
+## Two-Step Author Workflow
+
+Most days, use one simple entry point:
+
+```bash
+npm run new
+```
+
+For a fast writing entry:
+
+```bash
+npm run write -- "A small title"
+```
+
+Once a week, check what would be published:
+
+```bash
+npm run publish:check
+```
+
+Then publish:
+
+```bash
+npm run publish:weekly
+```
+
+The weekly script runs a production build, stages only safe content paths, commits them, and pushes to GitHub. Vercel deploys from GitHub after the push.
+
+Safe weekly paths are:
+
+- `src/content/`
+- `public/uploads/`
+- `public/images/`
+- `public/media/`
+- `public/photos/`
+
 There is also a local author page at `/studio` for generating and saving markdown entries from the browser.
 
 If you want clean starter files without publishing fake content, use:

@@ -2,9 +2,10 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PhotoCard from '../../components/PhotoCard.astro';
+import { isVisibleContent } from '../../utils/content';
 
 export async function getStaticPaths() {
-  const photos = await getCollection('photography');
+  const photos = await getCollection('photography', ({ data }) => isVisibleContent(data));
   const categories = [...new Set(photos.map((p) => p.data.category).filter(Boolean))];
   
   return categories.map((category) => ({
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props;
-const photos = (await getCollection('photography')).filter(
+const photos = (await getCollection('photography', ({ data }) => isVisibleContent(data))).filter(
   (p) => p.data.category === category
 );
 

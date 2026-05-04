@@ -145,6 +145,22 @@ Pick one system and stay with it.
 
 ## Two Ways To Add Content
 
+### Fast daily flow
+
+Use the unified author script:
+
+```bash
+npm run new
+```
+
+For a quick writing entry:
+
+```bash
+npm run write -- "A small title"
+```
+
+This creates the Markdown file in the right folder with the right frontmatter.
+
 ### Option 1: Edit files directly
 
 This is the most author-friendly method.
@@ -297,6 +313,15 @@ Typical flow:
 2. commit to GitHub
 3. push to `main`
 4. Vercel deploys automatically
+
+The weekly publishing script does that safely for content changes:
+
+```bash
+npm run publish:check
+npm run publish:weekly
+```
+
+It runs a production build, stages only content/media paths, commits them, and pushes to GitHub.
 
 ## Current Working Rule
 
