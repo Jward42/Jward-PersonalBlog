@@ -56,6 +56,7 @@ Useful top-level docs:
 
 - `USAGE.md`: daily writing and publishing workflow
 - `docs/content-workflow.md`: content model details and media workflow
+- `docs/obsidian-to-blog-workflow.md`: how finished Obsidian drafts become website posts
 - `docs/STYLEGUIDE.md`: visual and editorial style notes
 
 ## Content Rules

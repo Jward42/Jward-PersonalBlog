@@ -4,6 +4,9 @@ The site does not use a hosted CMS. Markdown files are the content database.
 
 ## Daily Entry Points
 
+If a post starts in Obsidian, use `docs/obsidian-to-blog-workflow.md` first:
+Obsidian is for thinking and drafting; this repo is for public publishing.
+
 Create new content:
 
 ```bash

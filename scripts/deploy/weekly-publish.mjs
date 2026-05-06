@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import process from 'node:process';
 
 const args = process.argv.slice(2);
@@ -15,6 +16,10 @@ const safePathspecs = [
   'public/media/',
   'public/photos/',
 ];
+
+function existingSafePathspecs() {
+  return safePathspecs.filter((pathspec) => existsSync(pathspec));
+}
 
 function getArgValue(name) {
   const index = args.indexOf(name);
@@ -47,7 +52,7 @@ function isSafeFile(filePath) {
 }
 
 function stagedFiles() {
-  return splitNul(run('git', ['diff', '--cached', '--name-only', '-z']));
+  return splitNul(run('git', ['diff', '--cached', '--name-only', '-z', '--', ...existingSafePathspecs()]));
 }
 
 function changedSafeFiles() {
@@ -101,7 +106,7 @@ try {
     process.exit(0);
   }
 
-  runVisible('git', ['add', '--', ...safePathspecs]);
+  runVisible('git', ['add', '--', ...existingSafePathspecs()]);
 
   const stagedAfterAdd = stagedFiles().filter(isSafeFile);
   if (!stagedAfterAdd.length) {

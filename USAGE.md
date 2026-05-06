@@ -18,6 +18,10 @@ cd /Users/jinyuhan/local_documents/Jward-PersonalBlog
 
 ## Daily Writing
 
+Obsidian is the thinking and drafting layer. Public-ready drafts can be rewritten
+from `/Users/jinyuhan/local_documents/obsidian/Notes/blog/drafts` into this repo.
+See `docs/obsidian-to-blog-workflow.md` before importing private notes.
+
 Create a new entry:
 
 ```bash
